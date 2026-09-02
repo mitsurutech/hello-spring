@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- The Spring Boot parent brings the dependency versions and the repackage plugin that
+       makes the runnable fat jar. Pinned, so a build here does not change under you. -->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>3.4.1</version>
+    <relativePath/>
+  </parent>
+
+  <groupId>dev.learntools</groupId>
+  <artifactId>hello-spring</artifactId>
+  <version>1.0.0</version>
+  <name>hello-spring</name>
+
+  <properties>
+    <java.version>21</java.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <!-- **One jar, and a fixed name.** The start command is `java -jar target/*.jar`, so a
+         target/ holding two jars makes that glob ambiguous. Spring Boot's repackage leaves
+         the original as `.jar.original`, which the glob does not match, and naming the
+         artifact keeps the version out of the filename so nothing has to be edited when it
+         changes. -->
+    <finalName>app</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+</project>
